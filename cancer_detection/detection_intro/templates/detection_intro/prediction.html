@@ -73,7 +73,7 @@
             formData.append("image", file);
             document.getElementById('loading').innerHTML='Predicting...'
             document.getElementById('loading').style.color='blue'
-           data=await fetch('http://127.0.0.1:8000/predict/',{
+           data=await fetch('http://localhost:8000/predict/',{
         method:'POST',
         body:formData
     }, {
@@ -83,6 +83,7 @@
                 // lol
             })
             data=await data.json()
+            
             document.getElementById('loading').innerHTML=data.msg
             document.getElementById('loading').style.color=data.msg.split(" ")[0]=='Congrats!'?"green":'orangered'
             document.getElementById('loading').style.fontWeight='bolder'

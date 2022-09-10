@@ -11,7 +11,7 @@ def index(request):
 def prediction(request):
     return render(request,'detection_intro/prediction.html')
 
-@csrf_exempt
+# @csrf_exempt
 def predict(request):
     # if request.method=='POST':
         import tensorflow as tf
@@ -29,4 +29,4 @@ def predict(request):
         x_tests=tf.convert_to_tensor(x_test,dtype='float32')
         predictions=model.predict(x_tests)
         print(predictions[0][0])
-        return JsonResponse({'msg':'Oops that is Cancerous tumor'} if predictions[0][0]>=0.5 else {'msg':"Congrats! your skin is not Cancerous"})
+        return JsonResponse({"msg":"Oops that is Cancerous tumor"} if predictions[0][0]>=0.5 else {"msg":"Congrats! your skin is not Cancerous"})
