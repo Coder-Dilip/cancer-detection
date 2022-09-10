@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Prediction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        @keyframes fadeup {
+            0% {
+                transform: translateY(80px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0px);
+                opacity: 1
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <div id="logo" style="display: flex;align-items: center;margin: 30px;margin-left: 5%;">
+        <img style="width:80px;height:auto;" src="{% static 'images/logo.png' %}" alt="">
+        <em>
+            <p style="color:orangered;font-weight: bolder;font-size: 0.8rem;;"><span
+                    style="color: blueviolet;font-weight: bold;">C-</span>Scan</p>
+        </em>
+    </div>
+
+    <div
+        style="display: flex;flex-wrap:wrap;justify-content: space-between;max-width: 700px;margin: auto;align-items: center;animation:fadeup 1s ease-in">
+
+        <div>
+            <!-- Sample Image -->
+            <p style="text-align: center;opacity: 0.6;">sample</p>
+            <img style="height: 300px;width: 300px;max-height: 80vw;max-width: 80vw;border-radius: 10px;object-fit: cover;"
+                src="{% static 'images/malignant.jpg' %}" id="src" alt="">
+        </div>
+        <div>
+            <h1>Upload your image</h1>
+            <br>
+            <p style="max-width: 300px">Uplod the image of the skin to check whether the skin is cancerous or not</p>
+            <br>
+            <form enctype="multipart/form-data" method="post">
+                <input name="image"
+                    style="position: absolute;z-index:10;opacity: 0;height: 40px;width: 100px;border: 2px solid black;"
+                    accept="image/png, image/gif, image/jpeg" id="image" type="file" onchange="url_image()">
+                <button
+                    style="z-index:9;padding: 10px 25px;background-color: blueviolet;color: white;outline: none;border-radius: 3px;border:none;cursor: pointer;">upload</button>
+                <p id="loading"></p>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+
+        const post_data = async(file) => {
+            var formData = new FormData();
+
+            formData.append("image", file);
+            document.getElementById('loading').innerHTML='Predicting...'
+            document.getElementById('loading').style.color='blue'
+           data=await fetch('http://127.0.0.1:8000/predict/',{
+        method:'POST',
+        body:formData
+    }, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            data=await data.json()
+            document.getElementById('loading').innerHTML=data.msg
+            document.getElementById('loading').style.color=data.msg.split(" ")[0]=='Congrats!'?"green":'orangered'
+            document.getElementById('loading').style.fontWeight='bolder'
+            document.getElementById('loading').style.marginTop='30px'
+
+            
+        }
+        document.getElementById('logo').addEventListener('click', (() => {
+            window.location.href = '/'
+        }))
+        function url_image() {
+            curr_img = document.getElementById('image')
+            const [file] = curr_img.files
+            if (file) {
+                document.getElementById('src').src = URL.createObjectURL(file)
+                post_data(file)
+            }
+
+
+        }
+    </script>
+</body>
+
+</html>

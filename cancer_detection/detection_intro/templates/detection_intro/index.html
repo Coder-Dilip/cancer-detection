@@ -1,0 +1,126 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Detection - Malignant & Benign </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+       
+
+        .hero_img {
+            transform: rotateY(180deg);
+            -webkit-animation: updown 2s alternate infinite ease-in-out;
+            animation: updown 2s alternate infinite ease-in-out;
+        }
+
+        @keyframes updown {
+            0% {
+                transform: translateY(10px) rotate3d(0, 0, 0,
+                        0deg) rotateY(180deg);
+            }
+
+            100% {
+                transform: translateY(-10px) rotate3d(0, 0, 0,
+                        0deg) rotateY(180deg);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(120px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+
+        .btn{
+            outline: none;
+            border: none;
+            border-radius: 3px;
+            background-color: blueviolet;
+            color: white;
+            padding: 10px 23px;
+            cursor: pointer;
+            transition: .3s;
+        }
+        .btn:hover{
+            background-color: rgb(69, 21, 114);
+            transition: .3s;
+        }
+        .btn:active{
+            transform: scale(1.1);
+            transition: .3s;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body >
+    <div id="logo" style="display: flex;align-items: center;margin: 30px;margin-left: 5%;">
+    <img style="width:80px;height:auto;" src="{% static 'images/logo.png' %}" alt="">
+    <em><p style="color:orangered;font-weight: bolder;font-size: 0.8rem;;"><span style="color: blueviolet;font-weight: bold;">C-</span>Scan</p></em>
+    </div>
+    <div style="display:flex;align-items:center;justify-content: space-between;flex-wrap: wrap;margin:5%;animation:fadeInUp 1s ease-in">
+        <div>
+            <h1 style="font-size:3rem">Cancer <span style="color:blueviolet">Detection</span></h1>
+            <!-- <br> -->
+            <p style="max-width:400px;font-size: 1.1rem;opacity:0.6">Welcome, Our AI can classify whether the rashes in skin is Malignant or Benign
+            </p>
+    <button id="btn" class="btn">Let's Begin</button>
+
+        </div>
+        <img style="height:auto;max-width: 50vw;" class="hero_img" src="{% static 'images/ai_doctor.jpg' %}" alt="">
+    </div>
+    <div style="margin:5%;margin-top: 100px;max-width: 1300px;">
+        <br>
+        <div style="display:flex;flex-wrap:wrap;justify-content: space-between;align-items: center;">
+            <div>
+                <img style="border-radius: 10px;max-width: 500px;height: auto;width: 80vw;" src="{% static 'images/cancer.jpg' %}" alt="">
+            </div>
+            <div>
+        <h1><span style="color:red">Malignant</span> vs <span style="color:Green">Benign</span></h1>
+        <ul style="max-width:40vw;width:90%">
+            <li><strong style="color:green">Benign=></strong> The tumor doesn’t contain cancerous cells. Hence it can be easily cured and not dangerous.</li>
+            <br>
+            <li><strong style="color:red">Malignant=></strong> The tumor is cancerous in nature and is innately dangerous because the division of its cells can take place uncontrollably.</li>
+        </ul>
+        <br><br>
+        <h5 style="opacity:0.6">Our Model can classify whether the skin mole is Malignant or Benign</h5>
+        </div>
+        
+        </div>
+
+        <div style="margin-top: 150px">
+            <h1>How its <spam style="color:blue">Works?</spam></h1>
+            <br>
+            <p style="max-width:700px;width: 90%;text-align: justify;">Our AI model is trained in <span style="color: orangered">Tensorflow</span> -- A Deep Learning library with the accuracy of 96%. With the Application of Convolutional Neural Network we achieved such a high accuracy. <br><br>The model process the given image of skin and look through the parts of an image and decide whether the features in those parts contain cancerous skin or not. If the skin is looking cancerous then It will predict the skin as Malignant else Benign</p>
+        </div>
+<br>
+        <h3><a style="color:orange" href="/prediction">Try it Out!</a></h3>
+    </div>
+</body>
+
+<script>
+    document.getElementById('logo').addEventListener('click',(()=>{
+        window.location.href='/'
+    }))
+    document.getElementById('btn').addEventListener('click',(()=>{
+        window.location.href='/prediction'
+    }))
+</script>
+
+</html>
