@@ -1,0 +1,1 @@
+web gunicorn cancer_detection.wsgi:application --log-file -
