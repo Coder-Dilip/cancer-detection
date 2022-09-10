@@ -5,10 +5,10 @@ cachetools==5.2.0
 certifi==2022.6.15
 charset-normalizer==2.1.1
 Django==4.1
-flatbuffers2.0.7
+flatbuffers==2.0.7
 gast==0.4.0
-google-auth2.11.0
-google-auth-oauthlib0.4.6
+google-auth==2.11.0
+google-auth-oauthlib==0.4.6
 google-pasta==0.2.0
 grpcio==1.48.1
 h5py==3.7.0
@@ -35,11 +35,11 @@ rsa==4.9
 setuptools==63.4.3
 six==1.16.0
 sqlparse==0.4.2
-tensorboard2.10.0
+tensorboard==2.10.0
 tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.1
 tensorflow==2.10.0
-tensorflow-estimator2.10.0
+tensorflow-estimator==2.10.0
 tensorflow-io-gcs-filesystem==0.26.0
 termcolor==1.1.0
 typing_extensions==4.3.0
